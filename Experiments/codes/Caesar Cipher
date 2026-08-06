@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    char text[100], encrypt[100], decrypt[100];
+    int key, i;
+
+    printf("Enter Plain Text: ");
+    scanf("%s", text);
+
+    printf("Enter Key: ");
+    scanf("%d", &key);
+
+    // Encryption
+    for(i = 0; text[i] != '\0'; i++)
+    {
+        if(text[i] >= 'A' && text[i] <= 'Z')
+            encrypt[i] = ((text[i] - 'A' + key) % 26) + 'A';
+        else if(text[i] >= 'a' && text[i] <= 'z')
+            encrypt[i] = ((text[i] - 'a' + key) % 26) + 'a';
+        else
+            encrypt[i] = text[i];
+    }
+    encrypt[i] = '\0';
+
+    // Decryption
+    for(i = 0; encrypt[i] != '\0'; i++)
+    {
+        if(encrypt[i] >= 'A' && encrypt[i] <= 'Z')
+            decrypt[i] = ((encrypt[i] - 'A' - key + 26) % 26) + 'A';
+        else if(encrypt[i] >= 'a' && encrypt[i] <= 'z')
+            decrypt[i] = ((encrypt[i] - 'a' - key + 26) % 26) + 'a';
+        else
+            decrypt[i] = encrypt[i];
+    }
+    decrypt[i] = '\0';
+
+    printf("\nEncrypted Text : %s", encrypt);
+    printf("\nDecrypted Text : %s", decrypt);
+
+    return 0;
+}
